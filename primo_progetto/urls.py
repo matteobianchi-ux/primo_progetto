@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("prima_app.urls", namespace="prima_app")),
     path('', include("seconda_app.urls", namespace="seconda_app")),
-    path('', include("prova_pratica_1_B.urls", namespace="prova_pratica_1_B"))
+    path('', include("prova_pratica_1_B.urls", namespace="prova_pratica_1_B")),
+    path('', include("news.urls", namespace="news"))
 ]
