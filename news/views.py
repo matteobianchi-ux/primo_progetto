@@ -51,6 +51,36 @@ def home(request):
 
 def ArticoloDetailView(request, pk):
     #articolo=Articolo.objects.get(pk=pk)
-    articolo=get_object_or_404(articolo, pk=pk)
+    articolo = get_object_or_404(Articolo, pk=pk)
     context={"articolo": articolo}
-    return render (request, "articolo_detal.html", context)
+    return render (request, "news/articolo.html", context)
+
+def listaArticoli(request, pk):
+    articoli=Articolo.objects.filter(giornalista_id=pk)
+    context={
+        'articoli':articoli,
+    }
+    return render(request, 'news/lista_articoli.html', context)
+
+from django.shortcuts import render, get_object_or_404
+from .models import Articolo, Giornalista
+
+def listaArticoli(request, pk=None):
+    # Controlliamo se è stato passato l'ID del giornalista nell'URL
+    if pk is None:
+        # Se pk è None, recuperiamo tutti gli articoli presenti nel database
+        articoli=Articolo.objects.all()
+        titolo_pagina="Tutti gli articoli"
+    else:
+        # Se pk è stato passato, filtriamo gli articoli selezionando solo quelli
+        # in cui il campo 'giornalista' corrisponde alla primary key ricevuta.
+        giornalista=get_object_or_404(Giornalista, pk=pk)
+        articoli=Articolo.objects.filter(giornalista=giornalista)
+        titolo_pagina="Articoli di un giornalista"
+
+    # Dizionario 'context' da passare al template HTML
+    context={
+        'articoli':articoli,
+        'titolo_pagina':titolo_pagina,
+    }
+    return render(request, 'news/lista_articoli.html', context)
