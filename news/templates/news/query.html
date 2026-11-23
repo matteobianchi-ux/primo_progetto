@@ -123,4 +123,48 @@
             <li>Nessun articolo contiene questa parola.</li>
         {% endfor %}
     </ul>
+    <h3>16. Articoli pubblicati a Gennaio 2023</h3>
+    <ul>
+        {% for articolo in articoli_mese_anno %}
+            <li>{{ articolo.titolo }} (Data: {{ articolo.data }})</li>
+        {% empty %}
+            <li>Nessun articolo trovato in questo mese e anno.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>17. Giornalisti con almeno un articolo con almeno 100 visualizzazioni</h3>
+    <ul>
+        {% for giornalista in giornalisti_con_articoli_popolari %}
+            <li>{{ giornalista.nome }} {{ giornalista.cognome }}</li>
+        {% empty %}
+            <li>Nessun giornalista trovato.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>18. Articoli di giornalisti nati dopo il 01/01/1990 E con almeno 50 visualizzazioni (AND)</h3>
+    <ul>
+        {% for articolo in artioli_con_and %}
+            <li>{{ articolo.titolo }} - di {{ articolo.giornalista.nome }} {{ articolo.giornalista.cognome }} (Nato: {{ articolo.giornalista.anno_di_nascita }}, Visualizzazioni: {{ articolo.visualizzazioni }})</li>
+        {% empty %}
+            <li>Nessun articolo trovato.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>19. Articoli di giornalisti nati dopo il 01/01/1990 OPPURE con al massimo 50 visualizzazioni (OR)</h3>
+    <ul>
+        {% for articolo in articoli_con_or %}
+            <li>{{ articolo.titolo }} - di {{ articolo.giornalista.nome }} {{ articolo.giornalista.cognome }} (Nato: {{ articolo.giornalista.anno_di_nascita }}, Visualizzazioni: {{ articolo.visualizzazioni }})</li>
+        {% empty %}
+            <li>Nessun articolo trovato.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>20. Articoli di giornalisti NON nati prima del 01/01/1990 (NOT)</h3>
+    <ul>
+        {% for articolo in articoli_con_not %}
+            <li>{{ articolo.titolo }} - di {{ articolo.giornalista.nome }} {{ articolo.giornalista.cognome }} (Nato: {{ articolo.giornalista.anno_di_nascita }})</li>
+        {% empty %}
+            <li>Nessun articolo trovato.</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}
