@@ -87,6 +87,9 @@ def listaArticoli(request, pk=None):
     }
     return render(request, 'news/lista_articoli.html', context)
 
+def giornalistaDetail(request):
+
+    
 def queryBase(request):
     #1. Tutti gli articoli scritti da giornalisti di un certo cognome:
     articoli_cognome=Articolo.objects.filter(giornalista__cognome='Rossi')
